@@ -1,0 +1,23 @@
+# Ignore JSON files
+*.json
+
+# Ignore image files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tif
+*.tiff
+
+# Ignore video files
+*.mp4
+*.avi
+*.mkv
+*.flv
+*.mov
+*.wmv
+
+# Ignore zip files
+*.zip
+
