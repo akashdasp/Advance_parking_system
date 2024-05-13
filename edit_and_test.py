@@ -51,6 +51,8 @@ def edit(event, x, y, flags, params):
                 x1, y1 = points[0]
                 x2, y2 = points[-1]
                 points = [(x1, y1), (x2, y1), (x2, y2), (x1, y2)]
+            # current_name = input("Enter the area name or press Enter to auto-assign: ")
+            # if current_name == "":
             current_name = len(area_map) + 1
             area_map[str(current_name)] = [int(pt) for p in points for pt in p]  
             points = []  
@@ -72,8 +74,9 @@ def edit_mode():
                 cv2.putText(frame, "Press r to Chose Rectrangle Bouding Box or simple draw a plygon", (10, frame.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
             elif shape_mode =="r":
                 cv2.putText(frame, "You are in the Rectrangle to Chose the Area to draw", (10, frame.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+                cv2.putText(frame, "Press P disabled the Rectrangle Mode", (10, frame.shape[0] - 90), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
             cv2.putText(frame, "Press d to Chose the Delete mode", (10, frame.shape[0] - 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-            cv2.putText(frame, "Press s to save the remaining Bbox ", (40, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+            cv2.putText(frame, "Press s to save the Bounding Box ", (40, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
              
 
         if delete_mode:
@@ -123,6 +126,9 @@ def edit_mode():
         elif key == ord('r'):
             shape_mode = 'r'
             print("Rectangle mode enabled. Click and drag to draw a rectangle.")
+        elif key==ord('p'):
+            shape_mode=None
+            print("Rectangle mode disabled. Click and drag to draw a Polygons.") 
 
     cap.release()
     cv2.destroyAllWindows()
@@ -161,9 +167,11 @@ def test_mode():
             if c in filter_class:
                 list_1.append((cx, cy))
                 if c== "car":
-                 cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,255),2)
+                 cv2.putText(frame, "Car",(cx,cy), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 255), 2)
+                #  cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,255),2)
                 if c== "truck":
-                 cv2.rectangle(frame,(x1,y1),(x2,y2),(255,255,0),2)
+                 cv2.putText(frame, "Truck",(cx,cy), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 0), 2)
+                #  cv2.rectangle(frame,(x1,y1),(x2,y2),(255,255,0),2)
             else:
                 pass
         in_counter = []
@@ -179,8 +187,8 @@ def test_mode():
 
         car_count = len(in_counter)
         out_counter = len(area_map) - car_count
-        cv2.putText(frame, "Ocuupied=" + str(car_count), (40, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-        cv2.putText(frame, "Free=" + str(out_counter), (40, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+        cv2.putText(frame, "Occupied=" + str(car_count), (40, 60), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 255, 255), 2)
+        cv2.putText(frame, "Free=" + str(out_counter), (40, 100), cv2.FONT_HERSHEY_TRIPLEX, 1, (255, 255, 255), 2)
         if mode=="init_test":
             cv2.putText(frame, "Press q to Exit", (10, frame.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
         if mode=="test":
