@@ -4,7 +4,7 @@ import json
 import os
 import pandas as pd
 from ultralytics import YOLO
-import time
+import sys
 mode = None  
 
 drawing = False
@@ -16,14 +16,18 @@ delete_area = None
 insert_mode = False
 shape_mode = None
 saved=False
+if len(sys.argv) != 2:
+    print("Usage: python edit_and_test.py <video_path>")
+    sys.exit(1)
 
+video_path = sys.argv[1]
 
 
 if os.path.exists('area_map.json'):
     with open('area_map.json', 'r') as f:
         area_map = json.load(f)
 
-cap = cv2.VideoCapture(r"E:\advance_parking_space_detection\yolov8-advance-parkingspace-detection\5283851-uhd_3840_2160_24fps.mp4")
+cap = cv2.VideoCapture(video_path)
 def edit(event, x, y, flags, params):
     global points, drawing, delete_mode, delete_area, insert_mode, shape_mode
     if delete_mode:
@@ -47,8 +51,6 @@ def edit(event, x, y, flags, params):
                 x1, y1 = points[0]
                 x2, y2 = points[-1]
                 points = [(x1, y1), (x2, y1), (x2, y2), (x1, y2)]
-            # current_name = input("Enter the area name or press Enter to auto-assign: ")
-            # if current_name == "":
             current_name = len(area_map) + 1
             area_map[str(current_name)] = [int(pt) for p in points for pt in p]  
             points = []  
