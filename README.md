@@ -1,33 +1,3 @@
-To create a README file for your project that explains how to set it up and use it, you can follow these steps:
-
-1. **Create a new virtual environment using virtualenv**:
-   ```bash
-   virtualenv venv
-   ```
-
-2. **Activate the virtual environment**:
-   - On Windows:
-     ```bash
-     venv\Scripts\activate
-     ```
-   - On macOS and Linux:
-     ```bash
-     source venv/bin/activate
-     ```
-
-3. **Install the Ultralytics library**:
-   ```bash
-   pip install ultralytics
-   ```
-
-4. **Run the `edit_and_test.py` script**:
-   ```bash
-   python edit_and_test.py <video_path>
-   ```
-
-Here's a template for your README file:
-
-```markdown
 # Advanced Parking Space Detection
 
 This project allows you to edit and test parking space detection in videos using YOLO and Ultralytics.
@@ -67,3 +37,9 @@ Run the `edit_and_test.py` script with the path to the video file you want to an
    python edit_and_test.py path/to/your/video.mp4
    ```
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
+
+Replace `your-username/your-repo` with your GitHub username and repository name. Also, make sure to include any additional instructions or information relevant to your project.
