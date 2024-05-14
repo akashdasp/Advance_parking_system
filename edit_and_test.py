@@ -53,8 +53,12 @@ def edit(event, x, y, flags, params):
                 points = [(x1, y1), (x2, y1), (x2, y2), (x1, y2)]
             # current_name = input("Enter the area name or press Enter to auto-assign: ")
             # if current_name == "":
-            current_name = len(area_map) + 1
-            area_map[str(current_name)] = [int(pt) for p in points for pt in p]  
+            current_name = len(area_map)+1 
+            if str(current_name) not in area_map.keys():
+                area_map[str(current_name)] = [int(pt) for p in points for pt in p]
+            else:
+                current_name=str(current_name)+'_a'
+                area_map[str(current_name)] = [int(pt) for p in points for pt in p]
             points = []  
 
 def edit_mode():
